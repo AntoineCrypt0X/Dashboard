@@ -4,13 +4,11 @@ import pandas as pd
 import numpy as np
 import asyncio
 import aiohttp
-import json
 import ccxt.async_support as ccxt_async
 import ccxt 
 import ta
 import plotly.express as px
 import plotly.graph_objects as go
-import time
 import statsmodels.api as sm
 from statsmodels.tsa.stattools import coint
 from sklearn.cluster import KMeans
