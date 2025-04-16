@@ -105,7 +105,7 @@ async def fetch_ohlcv_for_cryptos(crypto_list, timeframe="1d", limit=200):
         Returns:
             DataFrame: Un DataFrame contenant les dernières données OHLCV pour chaque paire.
     """
-    exchange = ccxt_async.binance(  # Utilisation de ccxt_async ici
+    exchange = ccxt_async.bitmart(  # Utilisation de ccxt_async ici
         {
             "enableRateLimit": True,
         }
@@ -173,7 +173,7 @@ async def fetch_ohlcv_histo(crypto1, crypto2, timeframe="1d", limit=500):
         Returns:
             DataFrame: Un DataFrame contenant les l'historique des prix des deux cryptos
     """
-    exchange = ccxt_async.binance(  # Utilisation de ccxt_async ici
+    exchange = ccxt_async.bitmart(  # Utilisation de ccxt_async ici
         {
             "enableRateLimit": True,
         }
@@ -234,7 +234,7 @@ async def fetch_ohlcv_close_from_list(symbols, timeframe="1d", limit=500):
     Returns:
         DataFrame: Un DataFrame contenant les colonnes 'close' pour chaque symbole.
     """
-    exchange = ccxt_async.binance({
+    exchange = ccxt_async.bitmart({
         "enableRateLimit": True,
     })
 
