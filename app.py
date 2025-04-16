@@ -423,7 +423,7 @@ def main():
 
     # Barre latérale pour la navigation
     st.sidebar.title("Navigation")
-    page = st.sidebar.radio("Sélectionnez une page:", ["Correlation/Cointegration", "Metrics", "Clustering"])
+    page = st.sidebar.radio("Sélectionnez une page:", ["Metrics", "Correlation/Cointegration", "Clustering"])
 
     if page == "Metrics":
         
