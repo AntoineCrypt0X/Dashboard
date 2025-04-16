@@ -5,5 +5,5 @@ ta
 streamlit
 aiohttp
 plotly
-sklearn
+scikit-learn
 statsmodels
