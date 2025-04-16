@@ -377,7 +377,6 @@ def rolling_spread_log(x, y, window):
     spread_log = np.log10(x / rol_x) - np.log10(y / rol_y)
     return spread_log
 
-@st.cache_data(ttl=15)
 def create_cluster(df, symbols, nb_cluster):
 
     full_df = pd.DataFrame()
