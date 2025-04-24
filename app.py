@@ -1169,8 +1169,8 @@ def main():
         fig = px.line(df_plot_wd, x="Index", y="Spread", title=f"Spread log rendements sur {_wd} periodes)")
 
         # Ajouter les lignes horizontales pour les seuils ±2
-        fig.add_hline(y=2*spread_std, line_dash="dash", line_color="red", annotation_text="z = 2", annotation_position="top left")
-        fig.add_hline(y=-2*spread_std, line_dash="dash", line_color="green", annotation_text="z = -2", annotation_position="bottom left")
+        fig.add_hline(y=2*spread_std, line_dash="dash", line_color="red", annotation_text="s = 2*std", annotation_position="top left")
+        fig.add_hline(y=-2*spread_std, line_dash="dash", line_color="green", annotation_text="s = -2*std", annotation_position="bottom left")
 
         # Affichage dans Streamlit
         st.plotly_chart(fig, use_container_width=True, key="spread_log_rdt")
