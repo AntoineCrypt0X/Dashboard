@@ -201,7 +201,7 @@ async def fetch_ohlcv_histo(crypto1, crypto2, timeframe="1d", limit=500):
         results = await asyncio.gather(*tasks, return_exceptions=True)
 
         dfs = []
-        for r, market in zip(results, [crypto1, crypto2]):
+        for r, market in zip(results, [crypto2, crypto1]):
             if isinstance(r, pd.DataFrame):
                 df = pd.DataFrame(r, columns=["timestamp", "open", "high", "low", "close", "volume"])
                 df["timestamp"] = pd.to_datetime(df["timestamp"], unit="ms")
@@ -839,7 +839,7 @@ def main():
             f"pct_change_{_crypto2}": st.column_config.NumberColumn(
                 f"pct_change_{_crypto2}", 
                 format="%.2f%%",
-                help="Percentage return crypto 1"
+                help="Percentage return crypto 2"
             ),
             f"evolve_3_periods_{_crypto2}": st.column_config.NumberColumn(
                 f"evolve_3_periods_{_crypto2}", 
@@ -1204,7 +1204,6 @@ def main():
             df_merged_initial = aggregate_crypto_data(df_coingecko_initial, df_binance_initial)
             symbols = [sym for sym in df_merged_initial["symbol"].tolist()]
             df_histo = fetch_ohlcv_histo_list_sync(symbols, timeframe=_timeframe, limit=_periods)
-            df_pre_select, df_clustered, centroids = create_cluster(df_histo, symbols, cluster)
 
         # Sélection multiple pour exclure des cryptos
         with col2:
@@ -1220,7 +1219,6 @@ def main():
             df_merged_initial = aggregate_crypto_data(df_coingecko_initial, df_binance_initial)
             symbols = [sym for sym in df_merged_initial["symbol"].tolist() if sym not in cryptos_to_exclude]
             df_histo = fetch_ohlcv_histo_list_sync(symbols, timeframe=_timeframe, limit=_periods)
-            df_pre_select, df_clustered, centroids = create_cluster(df_histo,symbols, cluster)
 
         with col3:
             _timeframe = st.selectbox(
@@ -1235,7 +1233,6 @@ def main():
             df_merged_initial = aggregate_crypto_data(df_coingecko_initial, df_binance_initial)
             symbols = [sym for sym in df_merged_initial["symbol"].tolist() if sym not in cryptos_to_exclude]
             df_histo = fetch_ohlcv_histo_list_sync(symbols, timeframe=_timeframe, limit=_periods)
-            df_pre_select, df_clustered, centroids = create_cluster(df_histo,symbols, cluster)
 
         with col4:
             _periods = st.selectbox(
@@ -1250,7 +1247,6 @@ def main():
             df_merged_initial = aggregate_crypto_data(df_coingecko_initial, df_binance_initial)
             symbols = [sym for sym in df_merged_initial["symbol"].tolist() if sym not in cryptos_to_exclude]
             df_histo = fetch_ohlcv_histo_list_sync(symbols, timeframe=_timeframe, limit=_periods)
-            df_pre_select, df_clustered, centroids = create_cluster(df_histo,symbols, cluster)
 
         # Choix du nombre de clusters
         with col5:
@@ -1267,8 +1263,8 @@ def main():
             df_merged_initial = aggregate_crypto_data(df_coingecko_initial, df_binance_initial)
             symbols = [sym for sym in df_merged_initial["symbol"].tolist() if sym not in cryptos_to_exclude]
             df_histo = fetch_ohlcv_histo_list_sync(symbols, timeframe=_timeframe, limit=_periods)
-            df_pre_select, df_clustered, centroids = create_cluster(df_histo,symbols, cluster)
-
+    
+        df_pre_select, df_clustered, centroids = create_cluster(df_histo,symbols, cluster)
         df_clustered
 
         # Plot du clustering avec Plotly Express
